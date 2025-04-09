@@ -7,7 +7,7 @@ defmodule Elastix.Search do
   import Elastix.HTTP, only: [prepare_url: 2]
 
   alias Elastix.HTTP
-  alias Elastix.JSON
+  
 
   @doc """
   Makes a request to the `_search` or the `_msearch` endpoint depending on the type of

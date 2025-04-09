@@ -7,7 +7,7 @@ defmodule Elastix.Alias do
   import Elastix.HTTP, only: [prepare_url: 2]
 
   alias Elastix.HTTP
-  alias Elastix.JSON
+  
 
   @doc """
   Excepts a list of actions for the `actions` parameter.

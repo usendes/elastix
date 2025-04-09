@@ -7,7 +7,6 @@ defmodule Elastix.Mapping do
   import Elastix.HTTP, only: [prepare_url: 2]
 
   alias Elastix.HTTP
-  alias Elastix.JSON
 
   @doc """
   Creates a new mapping.

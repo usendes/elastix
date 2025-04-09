@@ -7,7 +7,7 @@ defmodule Elastix.Bulk do
   import Elastix.HTTP, only: [prepare_url: 2]
 
   alias Elastix.HTTP
-  alias Elastix.JSON
+  
 
   @doc """
   Excepts a list of actions and sources for the `lines` parameter.

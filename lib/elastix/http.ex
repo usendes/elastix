@@ -4,7 +4,7 @@ defmodule Elastix.HTTP do
   """
   use HTTPoison.Base
 
-  alias Elastix.JSON
+  
 
   @type resp :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
 

@@ -7,7 +7,6 @@ defmodule Elastix.Document do
   import Elastix.HTTP, only: [prepare_url: 2]
 
   alias Elastix.HTTP
-  alias Elastix.JSON
 
   @doc """
   (Re)Indexes a document with the given `id`.
