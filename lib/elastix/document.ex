@@ -25,7 +25,7 @@ defmodule Elastix.Document do
         ) :: HTTP.resp()
   def index(elastic_url, index_name, id, data, query_params \\ []) do
     elastic_url
-    |> prepare_url(make_path(index_name, query_params, id, ""))
+    |> prepare_url(make_path(index_name, "_doc", query_params, id))
     |> HTTP.put(JSON.encode!(data))
   end
 
@@ -45,7 +45,7 @@ defmodule Elastix.Document do
         ) :: HTTP.resp()
   def index_new(elastic_url, index_name, data, query_params \\ []) do
     elastic_url
-    |> prepare_url(make_path(index_name, [], query_params))
+    |> prepare_url(make_path(index_name, "_doc", query_params))
     |> HTTP.post(JSON.encode!(data))
   end
 
@@ -65,7 +65,7 @@ defmodule Elastix.Document do
         ) :: HTTP.resp()
   def get(elastic_url, index_name, id, query_params \\ []) do
     elastic_url
-    |> prepare_url(make_path(index_name, query_params, id, ""))
+    |> prepare_url(make_path(index_name, "_doc", query_params, id))
     |> HTTP.get()
   end
 
@@ -111,7 +111,7 @@ defmodule Elastix.Document do
         ) :: HTTP.resp()
   def delete(elastic_url, index_name, id, query_params \\ []) do
     elastic_url
-    |> prepare_url(make_path(index_name, query_params, id, ""))
+    |> prepare_url(make_path(index_name, "_doc", query_params, id))
     |> HTTP.delete()
   end
 
@@ -149,7 +149,7 @@ defmodule Elastix.Document do
         ) :: HTTP.resp()
   def update(elastic_url, index_name, id, data, query_params \\ []) do
     elastic_url
-    |> prepare_url(make_path(index_name, query_params, id, "_update"))
+    |> prepare_url(make_path(index_name, "_doc", query_params, id, "_update"))
     |> HTTP.post(JSON.encode!(data))
   end
 
@@ -187,7 +187,7 @@ defmodule Elastix.Document do
   end
 
   @doc false
-  def make_path(index_name, query_params, id, suffix) do
-    HTTP.append_query_string("/#{index_name}/#{id}/#{suffix}", query_params)
+  def make_path(index_name, type_name, query_params, id, suffix \\ nil) do
+    HTTP.append_query_string("/#{index_name}/#{type_name}/#{id}/#{suffix}", query_params)
   end
 end
