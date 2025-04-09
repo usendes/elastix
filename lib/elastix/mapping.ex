@@ -35,6 +35,22 @@ defmodule Elastix.Mapping do
   def put(elastic_url, index_name, type_name, data, query_params),
     do: put(elastic_url, [index_name], type_name, data, query_params)
 
+  @spec post(
+          elastic_url :: String.t(),
+          index_names :: String.t() | list,
+          data :: map,
+          query_params :: Keyword.t()
+        ) :: HTTP.resp()
+  def post(elastic_url, index_names, data, query_params \\ [])
+
+  def post(elastic_url, index_names, data, query_params) when is_list(index_names) do
+    elastic_url
+    |> prepare_url(make_path(index_names, [], query_params))
+    |> HTTP.post(JSON.encode!(data))
+  end
+
+  def post(elastic_url, index_name, data, query_params), do: post(elastic_url, [index_name], data, query_params)
+
   @doc """
   Gets info on one or a list of mappings for one or a list of indices.
 
