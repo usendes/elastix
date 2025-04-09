@@ -25,7 +25,7 @@ defmodule Elastix.Document do
         ) :: HTTP.resp()
   def index(elastic_url, index_name, id, data, query_params \\ []) do
     elastic_url
-    |> prepare_url(make_path(index_name, query_params, id))
+    |> prepare_url(make_path(index_name, query_params, id, ""))
     |> HTTP.put(JSON.encode!(data))
   end
 
@@ -65,7 +65,7 @@ defmodule Elastix.Document do
         ) :: HTTP.resp()
   def get(elastic_url, index_name, id, query_params \\ []) do
     elastic_url
-    |> prepare_url(make_path(index_name, query_params, id))
+    |> prepare_url(make_path(index_name, query_params, id, ""))
     |> HTTP.get()
   end
 
