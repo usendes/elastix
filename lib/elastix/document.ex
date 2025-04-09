@@ -188,6 +188,17 @@ defmodule Elastix.Document do
 
   @doc false
   def make_path(index_name, type_name, query_params, id, suffix \\ nil) do
-    HTTP.append_query_string("/#{index_name}/#{type_name}/#{id}/#{suffix}", query_params)
+    path =
+      if is_nil(suffix) do
+        "/#{index_name}/#{type_name}/#{id}"
+      else
+        "/#{index_name}/#{type_name}/#{id}/#{suffix}"
+      end
+
+    if query_params == [] do
+      path
+    else
+      HTTP.append_query_string(path, query_params)
+    end
   end
 end
